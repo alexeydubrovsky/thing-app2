@@ -1,0 +1,47 @@
+<h2>Create a thing</h2>
+
+<form clrForm [formGroup]="createForm" (ngSubmit)="submit()" class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+
+  <div *ngIf="!submitted">
+
+  <clr-input-container>
+      <label>Name</label>
+      <input clrInput placeholder="Name" formControlName="name" type="text" required minLength="4"/>
+      <clr-control-helper>&nbsp;</clr-control-helper>
+      <clr-control-error>4 symbols at least</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label>e-mail</label>
+    <input clrInput placeholder="john.doe@test.com" name="email" formControlName="email" type="email"/>
+    <clr-control-helper>email</clr-control-helper>
+    <clr-control-error>invalid email</clr-control-error>
+  </clr-input-container>
+
+  <clr-date-container>
+    <label>Created</label>
+    <input clrDate name="created" formControlName="created" type="date"/>
+    <clr-control-helper>creation date</clr-control-helper>
+  </clr-date-container>
+
+  <clr-input-container>
+    <label>Rating</label>
+    <input clrInput placeHolder="rate it" name="rate" formControlName="rate" type="number" min="1" max="5"/>
+    <clr-control-helper>from 1 to 5</clr-control-helper>
+  </clr-input-container>
+
+    <clr-textarea-container>
+      <label>Description</label>
+      <textarea clrTextarea name="description" formControlName="description" value="description"></textarea>
+      <clr-control-helper>less than 256 symbols</clr-control-helper>
+    </clr-textarea-container>
+
+  <button class="btn btn-primary" (click)="submit()">Save</button>
+  <button class="btn" (click)="onReset()">Reset</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h3>done!</h3>
+    <button class="btn btn-success" (click)="onAdd()">Add more</button>
+  </div>
+</form>

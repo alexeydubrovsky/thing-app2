@@ -1,0 +1,40 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { Thing } from './thing';
+
+const thingApiUrl = 'http://localhost:8080/api/things';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ThingService {
+
+  things: Thing[] = [];
+
+  constructor(private http: HttpClient) { }
+
+  getThings(): Observable<any> {
+    console.log("here");
+    return this.http.get(thingApiUrl);
+  }
+
+  getThing(id: String): Observable<Thing> {
+    return of(this.things.find(thing => thing.id === id));
+  }
+
+  createNew(thing: Thing): Observable<any> {
+    console.log("The thing is: " + thing.name);
+    return this.http.post(thingApiUrl, thing);
+  }
+
+  download(): Observable<Blob> {
+    return this.http.get(thingApiUrl + "/download", {
+      responseType: 'blob'
+    })
+  }
+
+}
