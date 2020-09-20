@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ThingsComponent } from './things/things.component';
 import { ThingDetailComponent } from './thing-detail/thing-detail.component';
 import { ThingCreateComponent } from './thing-create/thing-create.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ThingCreateComponent } from './thing-create/thing-create.component';
     AppComponent,
     ThingsComponent,
     ThingDetailComponent,
-    ThingCreateComponent
+    ThingCreateComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

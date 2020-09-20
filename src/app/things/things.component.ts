@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Thing } from '../thing';
 import { ThingService } from '../thing.service';
+import { MessageService } from '../message.service';
 
 import { DOCUMENT } from '@angular/common';
 
@@ -17,7 +18,7 @@ export class ThingsComponent implements OnInit {
 
   selectedThing: Thing;
 
-  constructor(private thingService: ThingService) { }
+  constructor(private thingService: ThingService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getThings()
@@ -40,8 +41,12 @@ export class ThingsComponent implements OnInit {
               }
               this.things.push(thing);
             }
+            this.messageService.add("Thing list loaded");
           },
-          err => console.error("oops! " + err)
+          err => {
+            console.error("oops! " + err);
+            this.messageService.add("Error during thing list retrieval: " + err);
+          }
         );
   }
 

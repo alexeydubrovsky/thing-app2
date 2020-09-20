@@ -25,7 +25,7 @@
 
         </clr-datagrid>
         <div *ngIf="things">
-          <button class="btn" (click)="onDownload()" [disabled]="things.length &gt; 0">Download</button>
+          <button class="btn" (click)="onDownload()" [disabled]="things.length &lt; 1">Download</button>
         </div>
       </div>
       <div class="clr-col-2">
