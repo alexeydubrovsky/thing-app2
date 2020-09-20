@@ -36,8 +36,8 @@
       <clr-control-helper>less than 256 symbols</clr-control-helper>
     </clr-textarea-container>
 
-  <button class="btn btn-primary" (click)="submit()">Save</button>
-  <button class="btn" (click)="onReset()">Reset</button>
+  <button class="btn btn-primary" (click)="submit()" [disabled]="createForm.invalid">Save</button>
+  <button class="btn" type="reset" (click)="onReset()">Reset</button>
   </div>
 
   <div *ngIf="submitted">

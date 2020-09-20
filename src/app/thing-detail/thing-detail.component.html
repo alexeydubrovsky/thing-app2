@@ -1,11 +1,7 @@
 <div *ngIf="thing">
-
-  <h2>{{thing.name | uppercase}} Details</h2>
   <div><span>id: </span>{{thing.id}}</div>
-  <div>
-    <label>name:
-      <input  placeholder="name"/>
-    </label>
-  </div>
-
+  <div><span>name: </span>{{thing.name}}</div>
+  <div><span>email: </span>{{thing.email}}</div>
+  <div><span>rate: </span>{{thing.rate}}</div>
+  <div><span>description: </span>{{thing.description}}</div>
 </div>

@@ -1,31 +1,38 @@
 
 <div class="content-container">
   <div class="content-area">
-<h2>Thing list</h2>
+    <h2>Thing list</h2>
+    <div class="clr-row">
+      <div class="clr-col-10">
+        <clr-datagrid class="datagrid-compact">
+          <clr-dg-column>ID</clr-dg-column>
+          <clr-dg-column>Name</clr-dg-column>
+          <clr-dg-column>email</clr-dg-column>
+          <clr-dg-column>Created</clr-dg-column>
+          <clr-dg-column class="shortColumn">Rating</clr-dg-column>
+          <clr-dg-column>Description</clr-dg-column>
 
-<div class="content-container">
-  <div class="content-area">
-<clr-datagrid>
-  <clr-dg-column>ID</clr-dg-column>
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>email</clr-dg-column>
-  <clr-dg-column>Created</clr-dg-column>
-  <clr-dg-column>Rating</clr-dg-column>
-  <clr-dg-column>Description</clr-dg-column>
+          <clr-dg-row *ngFor="let thing of things" (click)="onSelect(thing)">
+            <clr-dg-cell>{{thing.id}}</clr-dg-cell>
+            <clr-dg-cell>{{thing.name}}</clr-dg-cell>
+            <clr-dg-cell>{{thing.email}}</clr-dg-cell>
+            <clr-dg-cell>{{thing.created | date}}</clr-dg-cell>
+            <clr-dg-cell class="shortColumn">
+              <span [style.color]="rateColor(thing.rate)"><em>{{thing.rate}}</em></span>
+            </clr-dg-cell>
+            <clr-dg-cell>{{thing.description}}</clr-dg-cell>
+          </clr-dg-row>
 
-  <clr-dg-row *ngFor="let thing of things">
-    <clr-dg-cell>{{thing.id}}</clr-dg-cell>
-    <clr-dg-cell>{{thing.name}}</clr-dg-cell>
-    <clr-dg-cell>{{thing.email}}</clr-dg-cell>
-    <clr-dg-cell>{{thing.created}}</clr-dg-cell>
-    <clr-dg-cell>
-      <span [style.color]="rateColor(thing.rate)"><em>{{thing.rate}}</em></span>
-    </clr-dg-cell>
-    <clr-dg-cell>{{thing.description}}</clr-dg-cell>
-  </clr-dg-row>
-</clr-datagrid>
-  </div>
-  <div>
-    <button class="btn" (click)="onDownload()">Download</button>
+        </clr-datagrid>
+        <div *ngIf="things">
+          <button class="btn" (click)="onDownload()" [disabled]="things.length &gt; 0">Download</button>
+        </div>
+      </div>
+      <div class="clr-col-2">
+        <div *ngIf="selectedThing">
+          <app-thing-detail [thing]="selectedThing"></app-thing-detail>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

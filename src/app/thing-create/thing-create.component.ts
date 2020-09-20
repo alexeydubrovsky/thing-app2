@@ -62,7 +62,6 @@ export class ThingCreateComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.createForm.reset();
     this.submitted = false;
   }
 

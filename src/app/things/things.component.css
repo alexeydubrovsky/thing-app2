@@ -1,3 +1,7 @@
 em {
   font-weight: bold;
 }
+
+.shortColumn {
+  width: 24pt;
+}

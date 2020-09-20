@@ -15,6 +15,8 @@ export class ThingsComponent implements OnInit {
   things: Thing[];
   rc: string[] = ['', 'hsl(9, 88%, 61%)', 'hsl(9, 83%, 76%)', 'hsl(48, 95%, 48%)', 'hsl(93, 77%, 44%)', 'hsl(93, 67%, 38%)'];
 
+  selectedThing: Thing;
+
   constructor(private thingService: ThingService) { }
 
   ngOnInit(): void {
@@ -48,6 +50,10 @@ export class ThingsComponent implements OnInit {
       return "";
     }
     return this.rc[rate];
+  }
+
+  onSelect(thing: Thing): void {
+    this.selectedThing = thing;
   }
 
   onDownload(): void {
