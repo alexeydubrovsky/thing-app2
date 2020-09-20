@@ -28,7 +28,6 @@ export class ThingsComponent implements OnInit {
     this.thingService.getThings()
         .subscribe(
           thingsResponse => {
-            console.log(thingsResponse);
             this.things = [];
             for (var extThing of thingsResponse.things) {
               let thing: Thing = {
@@ -41,10 +40,11 @@ export class ThingsComponent implements OnInit {
               }
               this.things.push(thing);
             }
-            this.messageService.add("Thing list loaded");
+            if (this.things.length > 0) {
+              this.onSelect(this.things[0]);
+            }
           },
           err => {
-            console.error("oops! " + err);
             this.messageService.add("Error during thing list retrieval: " + err);
           }
         );
@@ -70,6 +70,19 @@ export class ThingsComponent implements OnInit {
         a.download = 'things';
         a.click();
         URL.revokeObjectURL(objectUrl);
-      });
+      },
+      err => {
+        this.messageService.add("Error during download: " + err);
+      }
+    );
+  }
+
+  onBackup(): void {
+    this.thingService.backup()
+    .subscribe(res => {
+      this.messageService.add("db was saved");
+    }, err => {
+      this.messageService.add("Error during backup: " + err);
+    })
   }
 }

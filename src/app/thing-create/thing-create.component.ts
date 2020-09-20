@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { ThingService } from '../thing.service';
+import { MessageService } from '../message.service';
+
 import { Thing } from '../thing';
 
 const listURI = "/things";
@@ -26,7 +28,9 @@ export class ThingCreateComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private router: Router, private thingService: ThingService) {
+  constructor(private router: Router,
+              private thingService: ThingService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -45,15 +49,16 @@ export class ThingCreateComponent implements OnInit {
       description: this.createForm.get("description").value,
     };
     this.createForm.reset();
-    console.log("before call...");
     this.thingService.createNew(thing)
        .subscribe(
          () => {
-           console.log("...after call");
            this.submitted = true;
            this.router.navigate([listURI]);
          },
-         error => console.error("...call error")
+         error => {
+           this.messageService.add(error);
+           console.error("...call error");
+         }
        );
   }
 

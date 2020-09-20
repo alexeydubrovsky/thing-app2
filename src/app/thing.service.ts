@@ -14,11 +14,19 @@ const thingApiUrl = 'http://localhost:8080/api/things';
 export class ThingService {
 
   things: Thing[] = [];
+  selectedThing: Thing;
 
   constructor(private http: HttpClient) { }
 
+  selectThing(thing: Thing): void {
+    this.selectedThing = thing;
+  }
+
+  getSelectedThing(): Observable<Thing> {
+    return of(this.selectedThing);
+  }
+
   getThings(): Observable<any> {
-    console.log("here");
     return this.http.get(thingApiUrl);
   }
 
@@ -27,7 +35,6 @@ export class ThingService {
   }
 
   createNew(thing: Thing): Observable<any> {
-    console.log("The thing is: " + thing.name);
     return this.http.post(thingApiUrl, thing);
   }
 
@@ -36,5 +43,10 @@ export class ThingService {
       responseType: 'blob'
     })
   }
+
+  backup(): Observable<any> {
+    return this.http.get(thingApiUrl + "/backup");
+  }
+
 
 }

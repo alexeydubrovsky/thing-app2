@@ -13,7 +13,7 @@ import { ThingService } from '../thing.service';
 })
 export class ThingDetailComponent implements OnInit {
 
-  @Input() thing: Thing;
+  @Input thing: Thing;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,8 +25,7 @@ export class ThingDetailComponent implements OnInit {
   }
 
   getThing(): void {
-    const id = +this.route.snapshot.paramMap.get('id') + "";
-    this.thingService.getThing(id)
+    this.thingService.getSelectedThing()
         .subscribe(thing => this.thing = thing);
   }
 
